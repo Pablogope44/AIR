@@ -16,10 +16,28 @@ def obtener_datos():
             return respuesta.json()  
         else:
             print("Error en la solicitud")
+            return None
     except requests.RequestException:
         print("Error en la solicitud")
     
     
 
 
-obtener_datos()
+
+    
+
+
+def filtrarPost(datos):
+    resultado=[]
+    for valores in datos:
+        if valores["userId"]==1:
+            resultado.append(valores["title"])
+            'return[valores["title"] for valores in datos if valores["userId"] ==1]
+    return resultado
+    
+            
+        
+            
+datos=obtener_datos()            
+final=filtrarPost(datos)
+print(final)            
