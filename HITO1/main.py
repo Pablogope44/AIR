@@ -1,7 +1,7 @@
 'SCRIPT HITO 1'
+
+
 import requests
-
-
 
 
 def obtener_datos():
@@ -22,22 +22,28 @@ def obtener_datos():
     
     
 
-
-
-    
-
-
 def filtrarPost(datos):
     resultado=[]
     for valores in datos:
         if valores["userId"]==1:
             resultado.append(valores["title"])
-            'return[valores["title"] for valores in datos if valores["userId"] ==1]
+            #return[valores["title"] for valores in datos if valores["userId"] ==1] con list comprehession
     return resultado
     
             
-        
+def mostrarResultados(datos):
+    for i, titulo in enumerate(datos, 1):
+        print(f"{i}. {titulo}")
+#en enumerate el prmer parametro lleva la cuenta el segundo lo que se filtra
             
-datos=obtener_datos()            
-final=filtrarPost(datos)
-print(final)            
+
+        
+def main():
+   datos=obtener_datos()            
+   final=filtrarPost(datos)
+  
+   mostrarResultados(final)  
+   
+   
+if __name__ == "__main__":
+    main()
