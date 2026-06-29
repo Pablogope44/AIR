@@ -47,3 +47,4 @@ def main():
    
 if __name__ == "__main__":
     main()
+#sirve para que si se ejecuta el script directamente se ejecute main, pero si se importa no se ejecuta

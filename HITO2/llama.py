@@ -1,5 +1,5 @@
 import requests
-
+historial=[]
 def llamar_llama(prompt):
     respuesta = requests.post("http://localhost:11434/api/generate", json={
         "model":"llama3.2", "prompt": f"Tienes que resumir el siguiente texto:{prompt}","stream":False
@@ -16,10 +16,21 @@ def clasificar_texto(texto):
         return respuesta.json()["response"]
     except Exception:
         print("Error al procesar la solicitud")
+        
+def chat(mensaje):
+    historial.append({"role": "user", "content": mensaje})
+    
+    respuesta = requests.post("http://localhost:11434/api/chat", json={
+        "model": "llama3.2",
+        "messages": historial,
+        "stream": False
+    })
+    
+    respuesta_modelo = respuesta.json()["message"]["content"]
+    historial.append({"role": "assistant", "content": respuesta_modelo})
+    return respuesta_modelo
 
-   
-
-
+print(chat("¿Qué te pregunté antes?"))
 if __name__ == "__main__":
     print(llamar_llama("hola me gustan las patatas, jugar al futbol y videojuegos como el RDR2"))
     print(clasificar_texto("hola me gustan las patatas, jugar al futbol y videojuegos como el RDR2"))
