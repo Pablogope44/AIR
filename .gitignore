@@ -4,4 +4,3 @@ __pycache__/
 .env
 HITO1/*
 !HITO1/main.py
-__pycache__/
